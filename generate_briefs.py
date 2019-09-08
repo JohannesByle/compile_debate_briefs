@@ -21,7 +21,7 @@ if not path.exists('auth.txt'):
     flow = client.flow_from_clientsecrets('client_id.json', SCOPES)
     creds = tools.run_flow(flow, store, http=creds.authorize(Http(disable_ssl_certificate_validation=True)))
     with open('auth.txt', 'w') as f:
-        f.write("Google is ThoughtPol")
+        f.write("Google")
 
 # Initialize the main Google variable
 # noinspection PyBroadException
