@@ -4,28 +4,35 @@
 \usepackage{multicol}
 \usepackage{fancyhdr}
 \begin{document}
-\begin{multicols}{2}
-\pagenumbering{roman}
+    \pagenumbering{roman}
 
-\end{multicols}
-\begin{center}
-\section*{Index of Briefs by Category}
-\end{center}
-\begin{multicols}{2}
-\noindent
+    \begin{center}
+        \section*{Index of Briefs by Category}
+    \end{center}
+    \begin{multicols}{2}
+        \noindent
+        \BLOCK{ for category in briefs_by_category }
+        \subsection*{\VAR{category}}
+        \BLOCK{ for brief in briefs_by_category[category] }
+        \VAR{brief["title"]}\dotfill\VAR{brief["index"]}\\
+        \BLOCK{ endfor }
+        \BLOCK{ endfor }
+    \end{multicols}
 
-% Table of Contents - 1
-\end{multicols}
-\begin{center}
-\section*{List of All Briefs}
-\end{center}
-\begin{multicols}{2}
+    \begin{center}
+        \section*{List of All Briefs}
+    \end{center}
+    \begin{multicols}{2}
+        \noindent
+        \BLOCK{ for brief in briefs_sorted }
+        \VAR{brief["title"]}\dotfill\VAR{brief["index"]}\\
+        \BLOCK{ endfor }
+    \end{multicols}
 
-% Table of Contents - 2
-\end{multicols}
-\pagebreak
-\pagenumbering{gobble}
-\pagestyle{fancy}
-
-% Pages
+    \pagebreak
+    \pagenumbering{gobble}
+    \pagestyle{fancy}
+    \BLOCK{ for brief in briefs }
+    \label{\VAR{brief["id"]}}\fancyhead[C]{\VAR{brief["index"]}.\VAR{brief["title"]}}\includepdf[pages = -, pagecommand = {}]{\VAR{brief["path"]}}\\
+    \BLOCK{ endfor }
 \end{document}
